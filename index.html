@@ -1,0 +1,192 @@
+﻿
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f8fc">
+    <meta name="description" content="Kod örneklerini, notlarını ve sunum içeriklerini düzenle.">
+    <title>Örnekler Sunma — Kişisel Kütüphane</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#" aria-label="Örnekler Sunma ana sayfa">
+            <span class="brand-mark">o.</span>
+            <span class="brand-name">örnekler<span>sunma</span></span>
+        </a>
+
+        <nav class="header-nav" aria-label="Ana menü">
+            <a href="#presentation" class="nav-link active">Kütüphanem</a>
+            <a href="#library" class="nav-link">Örnekler</a>
+        </nav>
+
+        <button type="button" id="newTopBtn" class="button button-primary">
+            <span aria-hidden="true">＋</span> Yeni örnek
+        </button>
+    </header>
+
+    <main class="page">
+        <section class="intro">
+            <div class="eyebrow">KİŞİSEL BİLGİ KÜTÜPHANEN</div>
+            <h1>Fikirlerin burada <span>birikir.</span></h1>
+            <p>Kodlarını, notlarını ve ilham veren örneklerini tek bir yerde topla.</p>
+        </section>
+
+        <section class="editor-section" id="editorPanel">
+            <details id="editorDetails">
+                <summary>
+                    <span class="summary-left">
+                        <span class="summary-icon">＋</span>
+                        <span>
+                            <strong id="formHeading">Yeni örnek oluştur</strong>
+                            <small>Bir fikir ekle veya mevcut içeriğini düzenle</small>
+                        </span>
+                    </span>
+                    <span class="summary-arrow" aria-hidden="true">⌄</span>
+                </summary>
+
+                <form id="exampleForm" class="editor-form">
+                    <input type="hidden" id="exampleId">
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="title">Başlık <span>*</span></label>
+                            <input type="text" id="title" maxlength="150"
+                                   placeholder="Örn. REST API temelleri" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="category">Kategori <span>*</span></label>
+                            <select id="category" required>
+                                <option value="">Kategori seç</option>
+                                <option value="Web">Web</option>
+                                <option value="Mobil">Mobil</option>
+                                <option value="Veri">Veri</option>
+                                <option value="API">API</option>
+                                <option value="Güvenlik">Güvenlik</option>
+                                <option value="Diğer">Diğer</option>
+                            </select>
+                        </div>
+
+                        <div class="field full-width">
+                            <label for="summary">Kısa açıklama <span>*</span></label>
+                            <textarea id="summary" rows="3" maxlength="1000"
+                                      placeholder="Bu örnek ne anlatıyor?" required></textarea>
+                        </div>
+
+                        <div class="field full-width">
+                            <label for="code">Kod / örnek içeriği <span>*</span></label>
+                            <textarea id="code" class="code-input" rows="7"
+                                      placeholder="Kodunu veya örnek içeriğini buraya yaz..."
+                                      required></textarea>
+                        </div>
+
+                        <div class="field full-width">
+                            <label for="tags">Etiketler</label>
+                            <input type="text" id="tags"
+                                   placeholder="javascript, api, notlar">
+                            <small>Etiketleri virgülle ayır.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="button button-primary" id="saveBtn">
+                            Örneği kaydet
+                        </button>
+                        <button type="button" id="resetBtn" class="button button-secondary">
+                            Temizle
+                        </button>
+                    </div>
+                </form>
+            </details>
+        </section>
+
+        <section id="presentation" class="presentation-section">
+            <div class="section-topline">
+                <div>
+                    <div class="eyebrow">ÖNE ÇIKAN İÇERİK</div>
+                    <h2>Çalışma alanın</h2>
+                </div>
+                <span id="slideCounter" class="slide-counter">0 / 0</span>
+            </div>
+
+            <article class="presentation-card">
+                <div class="presentation-accent" aria-hidden="true"></div>
+                <div id="preview" class="preview-content" aria-live="polite"></div>
+                <div class="presentation-footer">
+                    <span class="presentation-hint">Kütüphanendeki örnekleri keşfet</span>
+                    <div class="presentation-controls">
+                        <button type="button" id="prevBtn" class="slide-button"
+                                aria-label="Önceki örnek">
+                            ←
+                        </button>
+                        <button type="button" id="nextBtn" class="slide-button"
+                                aria-label="Sonraki örnek">
+                            →
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="library" class="library-section">
+            <div class="library-heading">
+                <div>
+                    <div class="eyebrow">KAYDETTİĞİN İÇERİKLER</div>
+                    <h2>Örnek kütüphanesi <span id="countBadge">0</span></h2>
+                    <p>Aradığını bul, içeriklerini düzenle ve yeniden keşfet.</p>
+                </div>
+
+                <div class="data-actions">
+                    <button type="button" id="exportBtn" class="button button-secondary">
+                        ↓ JSON dışa aktar
+                    </button>
+                    <label for="importInput" class="button button-secondary import-label">
+                        ↑ JSON içe aktar
+                    </label>
+                    <input type="file" id="importInput"
+                           accept=".json,application/json" hidden>
+                </div>
+            </div>
+
+            <div class="library-toolbar">
+                <label class="search-box">
+                    <span aria-hidden="true">⌕</span>
+                    <input type="search" id="searchInput"
+                           placeholder="Başlık, açıklama, kod veya etiket ara..."
+                           aria-label="Örneklerde ara">
+                    <button type="button" id="clearSearchBtn"
+                            aria-label="Aramayı temizle" hidden>
+                        ×
+                    </button>
+                </label>
+
+                <label class="filter-box">
+                    <span>Kategori</span>
+                    <select id="filterCategory">
+                        <option value="Tümü">Tüm kategoriler</option>
+                    </select>
+                </label>
+
+                <div class="result-count" id="resultCount">0 sonuç</div>
+            </div>
+
+            <div id="itemList" class="item-list"></div>
+        </section>
+
+        <section class="backup-note">
+            <span aria-hidden="true">ⓘ</span>
+            <p>Örneklerin bu tarayıcıda saklanır. Önemli içeriklerini kaybetmemek için ara sıra JSON yedeği al.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a class="footer-brand" href="#">örnekler sunma.</a>
+        <span>Fikirlerini düzenli tut. Gerisi sana kalmış.</span>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
